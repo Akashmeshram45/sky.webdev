@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  header {
+    background-color: rgb(136, 233, 241);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header .logo img {
+    height: 50px;
+  }
+  
+  header .logo h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  header nav ul li {
+    margin-left: 20px;
+  }
+  
+  header nav ul li a {
+    color: rgb(6, 6, 6);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  header nav ul li a:hover {
+    text-decoration: underline;
+  }
+  header .cart a img {
+    height: 30px;
+    margin-left: 20px;
+  }
+  header .search-bar input {
+    padding: 10px;
+    width: 350px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+.payment-form {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.payment-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.payment-form input,
+.payment-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.payment-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.payment-form button:hover {
+    background-color: #45a049;
+}
+
+.payment-form input:focus,
+.payment-form select:focus {
+    outline-color: #4CAF50;
+}
+
+#errorMessage {
+    text-align: center;
+}
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header .logo img {
+        height: 40px;
+        align-items: left;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+        align-items: right;
+    }
+
+    header .search-bar input {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    header .cart img {
+        height: 25px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .team {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-member {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .team-member img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    header .search-bar input {
+        width: 100%;
+    }
+    
+    header .cart img {
+        height: 20px;
+    }
+
+    .team-member img {
+        width: 100px;
+        height: 100px;
+    }
+}

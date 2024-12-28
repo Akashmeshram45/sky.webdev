@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="stylepayment.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+               <img src="https://t4.ftcdn.net/jpg/05/39/22/19/360_F_539221999_t190YNzbDGhOjEnA1jAQHmXTrA1KX9Gk.jpg" alt="TechMart Logo">
+        </div>   
+        <nav>
+           <ul>
+               <li><a href="index.html">Home</a></li>
+               
+               <li><a href="index.html">Categories</a></li>
+               <li><a href="offers.html">Offers</a></li>
+               <li><a href="aboutus.html">About Us</a></li>
+               <li><a href="login.html">Login</a></li>
+               <li><a href="contact.html">Contact</a></li>
+           </ul>
+       </nav>
+           <div class="search-bar">
+               <input type="text" placeholder="Search for products, brands...">
+           </div>
+           <div class="cart">
+               <a href="addtocart.html"><img src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" alt="Cart"></a>
+           </div>
+       </header>
+    <div class="payment-form">
+        <h2>Payment Information</h2>
+        <form id="paymentForm">
+            <label for="paymentMethod">Choose Payment Method:</label>
+            <select id="paymentMethod" onchange="toggleCardDetails()" required>
+                <option value="">Select Method</option>
+                <option value="visa">Visa</option>
+                <option value="mastercard">MasterCard</option>
+                
+            </select>
+            
+            <div id="cardDetails" style="display: none;">
+                <label for="cardNumber">Card Number (16 digits):</label>
+                <input type="text" id="cardNumber" placeholder="Enter Card Number" required pattern="^\d{16}$">
+                
+                <label for="expiryDate">Expiry Date (MM/YY):</label>
+                <input type="text" id="expiryDate" placeholder="MM/YY" required pattern="^(0[1-9]|1[0-2])\/\d{2}$">
+                
+                <label for="cvv">CVV (3 digits):</label>
+                <input type="text" id="cvv" placeholder="Enter CVV" required pattern="^\d{3}$">
+            </div>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" placeholder="Enter Amount" required min="1">
+            
+            <button type="submit" id="payButton">Proceed to Payment</button>
+        </form>
+
+        <p id="errorMessage" style="color: red; display: none;">Please fill all required fields with valid information before proceeding.</p>
+    </div>
+
+    <script>
+        // Function to toggle visibility of card details fields based on payment method
+        function toggleCardDetails() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const cardDetails = document.getElementById('cardDetails');
+            if (paymentMethod === 'visa' || paymentMethod === 'mastercard') {
+                cardDetails.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'none';
+            }
+        }
+
+        // Form validation and submission
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form from submitting immediately
+
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+            const amount = document.getElementById('amount').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Validation logic
+            if (paymentMethod === 'visa' || paymentMethod === 'mastercard') {
+                // Check if all fields for card payment are filled and valid
+                if (!cardNumber.match(/^\d{16}$/) || !expiryDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/) || !cvv.match(/^\d{3}$/) || !amount) {
+                    errorMessage.style.display = 'block';
+                } else {
+                    errorMessage.style.display = 'none';
+                    // Proceed to payment (redirect to home page in this case)
+                    window.location.href = 'paymentsucc.html'; // Replace with your actual homepage URL
+                }
+        
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

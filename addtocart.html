@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKY - Your Tech Store</title>
+    <link rel="stylesheet" href="stylescart.css">
+</head>
+<body>
+
+   
+    <header>
+        <div class="logo">
+            <img src="https://t4.ftcdn.net/jpg/05/39/22/19/360_F_539221999_t190YNzbDGhOjEnA1jAQHmXTrA1KX9Gk.jpg" alt="TechMart Logo">
+     </div>   
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="index.html">Categories</a></li>
+                <li><a href="offers.html">Offers</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for products, brands...">
+        </div>
+        <div class="cart">
+            <a href="addtocart.html"><img src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" alt="Cart"></a>
+        </div>
+    </header>
+
+    <section id="product-list">
+        <div class="product">
+            <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/mobile/h/l/g/nord-ce4-cph2613-oneplus-original-imagzn8vbj5bfnzf.jpeg?q=90&crop=false" alt="Product 1">
+            <p>Oneplus Nord CE4</p>
+            <p>$100</p>
+            <button class="add-to-cart" data-product="Smartphone" data-price="100">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/mobile/j/w/j/galaxy-a34-5g-sm-a346elgcins-samsung-original-imah3p2yb3fcgefq.jpeg?q=90&crop=false" alt="Product 2">
+            <p>Samsung A34</p>
+            <p>$234</p>
+            <button class="add-to-cart" data-product="Laptop" data-price="234">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mba13-midnight-select-202402?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1708367688034" alt="Product 3">
+            <p>MacBook</p>
+            <p>$599</p>
+            <button class="add-to-cart" data-product="Headphones" data-price="599">Add to Cart</button>
+        </div>
+    </section>
+
+   
+    <section id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="total-price">0.00</span></p>
+        <button id="clear-cart">Clear Cart</button>
+         <a href="payment.html"><button id="clear-cart">Proceed to Pay</button></a>
+    </section>
+
+    <script >
+        
+function updateCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartList = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('total-price');
+    cartList.innerHTML = '';
+
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - $${item.price}`;
+        cartList.appendChild(li);
+        total += parseFloat(item.price);
+    });
+
+    totalPrice.textContent = total.toFixed(2);
+}
+
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const product = {
+            name: button.getAttribute('data-product'),
+            price: button.getAttribute('data-price')
+        };
+
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+       
+        updateCart();
+    });
+});
+
+document.getElementById('clear-cart').addEventListener('click', () => {
+    localStorage.removeItem('cart');
+    updateCart();
+});
+
+window.addEventListener('load', updateCart);
+
+document.getElementById('search-bar').addEventListener('input', (event) => {
+    const searchQuery = event.target.value.toLowerCase();
+    const products = document.querySelectorAll('.product');
+
+    products.forEach(product => {
+        const productName = product.querySelector('p').textContent.toLowerCase();
+        if (productName.includes(searchQuery)) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+});
+
+    </script>
+    <footer>
+        <p>&copy; 2024 SKY. All rights reserved.</p>
+    </footer>
+</body>
+</html>
